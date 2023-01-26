@@ -3,11 +3,12 @@ import { BlobServiceClient, StorageSharedKeyCredential} from "@azure/storage-blo
 import express from 'express'
 import cors from 'cors'
 import multer from 'multer'
-
+import dotenv from "dotenv"
+dotenv.config();
 const upload = multer({ dest: 'uploads/' });
 const PORT = 3000  || process.env.PORT;
-const accountName="motaautombiles"
-const accountKey='9mvfsI+x7fmnEEv9LDjwPxZkd4erWnTKwWvKkoPjtemXSXCCINSLn6Eb1PYowFyErSCukhDqkbC/+AStwkwQsw=='
+const accountName=process.env.ACCOUNT_NAME;
+const accountKey=process.env.ACCOUNT_KEY;
 if (!accountName) throw Error('Azure Storage accountName not found');
 if (!accountKey) throw Error('Azure Storage accountKey not found')
 const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
